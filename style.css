@@ -1,0 +1,595 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --bg-gradient: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --danger-color: #ef4444;
+  --danger-bg: #fef2f2;
+  --success-color: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-light: #eff6ff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Thanh Thao Tác Đầu Trang */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand .icon {
+  font-size: 1.5rem;
+}
+
+.brand h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.export-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-export.pdf {
+  background: var(--primary-gradient);
+  color: #ffffff;
+}
+
+.btn-export.pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+}
+
+.btn-export.img {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.btn-export.img:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+}
+
+/* Khu vực hóa đơn */
+.invoice-wrapper {
+  background: transparent;
+  padding: 8px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #e0e7ff;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.month-picker {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  padding: 6px 16px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.month-picker label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.month-picker input {
+  font-weight: 700;
+  color: var(--primary-color);
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+}
+
+/* Bố cục Grid 2 cột */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 960px) {
+  .grid-layout {
+    grid-template-columns: 1.45fr 1fr;
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-header.space-between {
+  justify-content: space-between;
+}
+
+.flex-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #e0e7ff;
+  color: var(--primary-color);
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 10px;
+}
+
+.card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.sub-group {
+  border: 1px solid #e0e7ff;
+  background: #fdfdff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.sub-group legend {
+  padding: 0 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+.readonly-box {
+  background: #f1f5f9;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.highlight-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--accent-light);
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 0;
+  border: 1px solid #bfdbfe;
+}
+
+.highlight-box span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.highlight-box strong {
+  font-size: 1rem;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-top: 14px;
+  margin-top: 8px;
+  border-top: 2px dashed var(--border-color);
+}
+
+.summary-line strong {
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: #e0e7ff;
+  color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: #c7d2fe;
+}
+
+.btn-danger {
+  background: var(--danger-bg);
+  color: var(--danger-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.btn-danger:hover {
+  background: #fca5a5;
+  color: #991b1b;
+}
+
+.dynamic-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Tiêu đề cột người thuê */
+.tenant-headers {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.tenant-headers span {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.tenant-headers .col-name {
+  flex: 1;
+}
+
+.tenant-headers .col-advance,
+.tenant-headers .col-debt {
+  width: 130px;
+  text-align: left;
+}
+
+.tenant-headers .col-action {
+  width: 36px;
+}
+
+/* Cột Tổng Hợp */
+.summary-section {
+  padding: 4px;
+  border-radius: var(--radius);
+}
+
+.bill-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid var(--border-color);
+}
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.bill-row span:last-child {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.divider {
+  border: none;
+  border-top: 2px dashed var(--border-color);
+  margin: 16px 0;
+}
+
+.grand-total-box {
+  background: #eef2ff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1.5px solid #c7d2fe;
+}
+
+.grand-total-box span {
+  font-weight: 700;
+  color: #3730a3;
+  font-size: 1rem;
+}
+
+.grand-total-box strong {
+  font-size: 1.35rem;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.base-share {
+  margin-top: 12px;
+  padding: 0 4px;
+}
+
+.base-share span:last-child {
+  color: var(--accent-blue);
+}
+
+.sub-title-margin {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 20px 0 12px 0;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.breakdown-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.breakdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.breakdown-header span {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.breakdown-header strong {
+  font-size: 1.05rem;
+}
+
+.breakdown-details {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Thẻ Thanh Toán - QR Phóng to 50% (210px x 210px) */
+.payment-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .payment-body {
+    flex-direction: column;
+  }
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.qr-container img {
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.payment-info {
+  flex: 1;
+  text-align: left;
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  min-width: 0;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-item .label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.info-item .value {
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: right;
+  word-break: break-word;
+}
+
+.highlight-memo {
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.valueHighlight {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+#livingExpensesList input[type="date"] {
+  max-width: 140px;
+}
+
+#tenantsList input[type="text"] {
+  flex: 1;
+}
+
+#tenantsList input[type="number"],
+#livingExpensesList input[type="number"] {
+  width: 130px;
+  max-width: 130px;
+  flex-shrink: 0;
+}

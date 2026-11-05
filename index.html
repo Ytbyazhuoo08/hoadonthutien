@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hóa Đơn Tiền Trọ & Sinh Hoạt</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Thanh Thao Tác Đầu Trang -->
+      <header class="top-bar">
+        <div class="brand">
+          <span class="icon">🧾</span>
+          <h2>Quản Lý Thuê Trọ</h2>
+        </div>
+        <div class="export-actions">
+          <button type="button" id="exportPdfBtn" class="btn btn-export pdf">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Xuất PDF
+          </button>
+          <button type="button" id="exportImgBtn" class="btn btn-export img">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            Xuất File Ảnh
+          </button>
+        </div>
+      </header>
+
+      <!-- Khu vực chính chứa thông tin hóa đơn -->
+      <div id="invoiceArea" class="invoice-wrapper">
+        <div class="app-header">
+          <span class="badge">HÓA ĐƠN THÁNG</span>
+          <h1>HÓA ĐƠN TIỀN TRỌ & SINH HOẠT</h1>
+          <div class="month-picker">
+            <label for="billMonth">Kỳ thanh toán:</label>
+            <input type="month" id="billMonth" />
+          </div>
+        </div>
+
+        <div class="grid-layout">
+          <!-- CỘT TRÁI: NHẬP DỮ LIỆU -->
+          <main class="form-section">
+            <!-- 1. Chi phí thuê trọ -->
+            <section class="card">
+              <div class="card-header">
+                <span class="step-num">01</span>
+                <h2>Chi Phí Thuê Trọ</h2>
+              </div>
+
+              <div class="form-group">
+                <label for="rentAmount">Tiền thuê phòng (VNĐ):</label>
+                <input type="number" id="rentAmount" value="5000000" min="0" />
+              </div>
+
+              <fieldset class="sub-group">
+                <legend>⚡ Chi tiết tiền điện</legend>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="elecOld">Số kWh cũ:</label>
+                    <input type="number" id="elecOld" value="1200" min="0" />
+                  </div>
+                  <div class="form-group">
+                    <label for="elecNew">Số kWh mới:</label>
+                    <input type="number" id="elecNew" value="1350" min="0" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="elecPrice">Đơn giá (VNĐ/kWh):</label>
+                    <input type="number" id="elecPrice" value="3500" min="0" />
+                  </div>
+                  <div class="form-group">
+                    <label>Tiêu thụ:</label>
+                    <div class="readonly-box">
+                      <span id="elecDiff">0</span> kWh
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group highlight-box">
+                  <span>Thành tiền điện:</span>
+                  <strong id="elecTotal">0 VNĐ</strong>
+                </div>
+              </fieldset>
+
+              <div class="form-group">
+                <label for="serviceFee">Phí dịch vụ cố định (VNĐ):</label>
+                <input type="number" id="serviceFee" value="150000" min="0" />
+              </div>
+
+              <fieldset class="sub-group">
+                <legend>🛵 Phí giữ xe</legend>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="bikeCount">Số lượng xe:</label>
+                    <input type="number" id="bikeCount" value="4" min="0" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bikePrice">Đơn giá (VNĐ/xe):</label>
+                    <input
+                      type="number"
+                      id="bikePrice"
+                      value="100000"
+                      min="0"
+                    />
+                  </div>
+                </div>
+                <div class="form-group highlight-box">
+                  <span>Thành tiền giữ xe:</span>
+                  <strong id="bikeTotal">0 VNĐ</strong>
+                </div>
+              </fieldset>
+
+              <div class="summary-line">
+                <span>Tổng tiền thuê trong tháng:</span>
+                <strong id="rentTotal">0 VNĐ</strong>
+              </div>
+            </section>
+
+            <!-- 2. Chi phí sinh hoạt chung -->
+            <section class="card">
+              <div class="card-header space-between">
+                <div class="flex-title">
+                  <span class="step-num">02</span>
+                  <h2>Chi Phí Sinh Hoạt Chung</h2>
+                </div>
+                <button
+                  type="button"
+                  id="addLivingItemBtn"
+                  class="btn btn-secondary"
+                >
+                  + Thêm khoản chi
+                </button>
+              </div>
+
+              <div id="livingExpensesList" class="dynamic-list"></div>
+
+              <div class="summary-line">
+                <span>Tổng tiền sinh hoạt:</span>
+                <strong id="livingTotal">0 VNĐ</strong>
+              </div>
+            </section>
+
+            <!-- 3. Thành viên thuê trọ -->
+            <section class="card">
+              <div class="card-header space-between">
+                <div class="flex-title">
+                  <span class="step-num">03</span>
+                  <h2>Danh Sách Người Thuê Trọ</h2>
+                </div>
+                <button
+                  type="button"
+                  id="addTenantBtn"
+                  class="btn btn-secondary"
+                >
+                  + Thêm người
+                </button>
+              </div>
+
+              <!-- Tiêu đề cột người thuê -->
+              <div class="tenant-headers">
+                <span class="col-name">Họ & Tên</span>
+                <span class="col-advance">Tiền ứng trước</span>
+                <span class="col-debt">Tiền nợ</span>
+                <span class="col-action"></span>
+              </div>
+
+              <div id="tenantsList" class="dynamic-list"></div>
+            </section>
+          </main>
+
+          <!-- CỘT PHẢI: TỔNG BILL & THANH TOÁN -->
+          <aside class="summary-section" id="exportSummaryArea">
+            <!-- Tổng bill -->
+            <section class="card bill-card">
+              <div class="card-header">
+                <h2>📌 TỔNG HỢP HÓA ĐƠN</h2>
+              </div>
+
+              <div class="bill-row">
+                <span>Tổng chi phí trọ:</span>
+                <span id="summaryRent">0 VNĐ</span>
+              </div>
+              <div class="bill-row">
+                <span>Tổng chi phí sinh hoạt:</span>
+                <span id="summaryLiving">0 VNĐ</span>
+              </div>
+              <hr class="divider" />
+              <div class="bill-row grand-total-box">
+                <span>TỔNG CỘNG THÁNG:</span>
+                <strong id="grandTotal">0 VNĐ</strong>
+              </div>
+              <div class="bill-row base-share">
+                <span>Chia đều trung bình:</span>
+                <span id="perPersonBase">0 VNĐ/người</span>
+              </div>
+
+              <h3 class="sub-title-margin">Chi tiết cần trả theo người</h3>
+              <div id="perPersonBreakdown" class="breakdown-list"></div>
+            </section>
+
+            <!-- Thông tin thanh toán cố định -->
+            <section class="card payment-card">
+              <div class="card-header">
+                <h2>💳 THÔNG TIN THANH TOÁN</h2>
+              </div>
+
+              <div class="payment-body">
+                <div class="qr-container">
+                  <img
+                    id="qrCodeImg"
+                    src="https://i.postimg.cc/yNYZ4587/1793845157347-279665759630645668-6482461303212381363-c40fd3419cd2bd6d711fb1cf406ceb00.jpg"
+                    alt="Mã QR Thanh Toán"
+                  />
+                </div>
+
+                <div class="payment-info">
+                  <div class="info-item">
+                    <span class="label">Ngân hàng:</span>
+                    <span class="value" id="bankName">MOMO</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">Số tài khoản:</span>
+                    <span class="value" id="bankAccount">0345437638</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">Chủ tài khoản:</span>
+                    <span class="value" id="accountHolder">LE LONG HO</span>
+                  </div>
+                  <div class="info-item highlight-memo">
+                    <span class="label">Nội dung CK:</span>
+                    <span class="valueHighlight" id="transferMemo">A13</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nạp CDN thư viện hỗ trợ xuất file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
